@@ -10,14 +10,16 @@ class QTabbedWindowPrivate;
 class QTabbedWindow : public QMainWindow
 {
     Q_OBJECT
-    Q_DECLARE_PRIVATE(QTabbedWindow)
 
 public:
     explicit QTabbedWindow(QWidget *parent = 0);
     ~QTabbedWindow();
 
+    int addView(QWidget* view);
+    void removeView(int index);
+
 private:
-    //QTabbedWindowPrivate* d_ptr;
+    QTabbedWindowPrivate* d_ptr;
 };
 
 #endif // QTABBEDWINDOW_H

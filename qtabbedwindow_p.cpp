@@ -1,6 +1,10 @@
 #include "qtabbedwindow_p.h"
 
 
-void QTabbedWindowPrivate::init(QWidget* parent)
+QTabbedWindowPrivate::QTabbedWindowPrivate(QTabbedWindow* q_ptr)
 {
+    tabs = new QTabWidget();
+
+    this->q_ptr = q_ptr;
+    this->q_ptr->setCentralWidget(tabs);
 }

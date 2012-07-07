@@ -5,9 +5,10 @@
 QTabbedWindow::QTabbedWindow(QWidget *parent) :
     QMainWindow(parent)
 {
-    d_func()->init(parent);
+    d_ptr = new QTabbedWindowPrivate(this);
 }
 
 QTabbedWindow::~QTabbedWindow()
 {
+    delete d_ptr;
 }

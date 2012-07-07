@@ -4,16 +4,14 @@
 #include "qtabbedwindow.h"
 
 
-class QTabbedWindowPrivate : public QObject
+class QTabbedWindowPrivate
 {
-    Q_OBJECT
-    Q_DECLARE_PUBLIC(QTabbedWindow)
-
 public:
-    void init(QWidget* parent);
+    QTabbedWindowPrivate(QTabbedWindow* q_ptr);
 
 private:
     QTabbedWindow *q_ptr;
+    QTabWidget* tabs;
 };
 
 #endif // QTABBEDWINDOWPRIVATE_H
