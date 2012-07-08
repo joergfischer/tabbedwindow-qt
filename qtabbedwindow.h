@@ -15,7 +15,7 @@ public:
     explicit QTabbedWindow(QWidget *parent = 0);
     ~QTabbedWindow();
 
-    int addView(QWidget* view);
+    int addView(QWidget* view, QString &title);
     void removeView(int index);
 
 private:

@@ -8,7 +8,20 @@ QTabbedWindow::QTabbedWindow(QWidget *parent) :
     d_ptr = new QTabbedWindowPrivate(this);
 }
 
+
 QTabbedWindow::~QTabbedWindow()
 {
     delete d_ptr;
+}
+
+
+int QTabbedWindow::addView(QWidget *view, QString &title)
+{
+    return d_ptr->addView(view, title);
+}
+
+
+void QTabbedWindow::removeView(int index)
+{
+    d_ptr->removeView(index);
 }

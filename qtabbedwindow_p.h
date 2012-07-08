@@ -9,6 +9,9 @@ class QTabbedWindowPrivate
 public:
     QTabbedWindowPrivate(QTabbedWindow* q_ptr);
 
+    int addView(QWidget* view, QString &title);
+    void removeView(int index);
+
 private:
     QTabbedWindow *q_ptr;
     QTabWidget* tabs;
