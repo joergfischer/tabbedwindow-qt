@@ -1,5 +1,7 @@
 #include "QtGui"
 #include "tabbar_p.h"
+#include "tabbedwindow.h"
+#include "tabview_p.h"
 
 
 TabBarPrivate::TabBarPrivate(QWidget *parent) :
@@ -33,9 +35,41 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
     // If left button was released and a dragging action is involved
     // stop dragging
     if (dragging > -1) {
-        qDebug() << "stop dragging tab" << dragging;
+        // Stop dragging
+
+        TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
+                    QApplication::widgetAt(mapToGlobal(event->pos())));
+
+        qDebug() << "stop dragging tab" << "on widget" << w;
+
+        // Chose action by the widget under the mouse's coordinates
+        if (w == NULL) {
+            createNewWindow(dragging);
+        }
+
+        // Reset flag
         dragging = -1;
     }
+}
+
+
+void TabBarPrivate::createNewWindow(int index)
+{
+    // Retrieve references
+    TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
+
+    // Create the new window
+    TabbedWindow *wnd = new TabbedWindow();
+
+    // Move widget to the new window
+    QWidget *tab = view->widget(index);
+    QString text = view->tabText(index);
+
+    view->removeTab(index);
+    wnd->addView(tab, text);
+
+    // Show the new window
+    wnd->show();
 }
 
 

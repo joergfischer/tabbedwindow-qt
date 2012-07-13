@@ -12,6 +12,9 @@ public:
     void mousePressEvent(QMouseEvent *);
     void mouseMoveEvent(QMouseEvent *);
     void mouseReleaseEvent(QMouseEvent *);
+
+protected:
+    void createNewWindow(int index);
     
 signals:
     
