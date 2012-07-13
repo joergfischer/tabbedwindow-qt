@@ -3,9 +3,9 @@
 
 
 TabbedWindow::TabbedWindow(QWidget *parent) :
-    QMainWindow(parent)
+    QMainWindow(parent),
+    d_ptr(new TabbedWindowPrivate(this))
 {
-    d_ptr = new TabbedWindowPrivate(this);
 }
 
 
