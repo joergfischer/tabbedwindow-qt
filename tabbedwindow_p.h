@@ -2,6 +2,7 @@
 #define TABBEDWINDOWPRIVATE_H
 
 #include "tabbedwindow.h"
+#include "tabview_p.h"
 
 
 class TabbedWindowPrivate : public QObject
@@ -12,11 +13,12 @@ public:
     TabbedWindowPrivate(TabbedWindow* q_ptr);
 
     int addView(QWidget* view, const QString &title);
+    int insertTab(QPoint pos, QWidget *page, QString text);
     void removeView(int index);
 
 private:
     TabbedWindow *q_ptr;
-    QTabWidget* tabs;
+    TabViewPrivate* tabs;
 };
 
 #endif // TABBEDWINDOWPRIVATE_H

@@ -6,8 +6,10 @@
 class TabViewPrivate : public QTabWidget
 {
     Q_OBJECT
+
 public:
     explicit TabViewPrivate(QWidget *parent = 0);
+    int tabAt(const QPoint &pos);
     
 signals:
     

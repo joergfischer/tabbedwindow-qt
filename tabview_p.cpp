@@ -7,3 +7,9 @@ TabViewPrivate::TabViewPrivate(QWidget *parent) :
 {
     setTabBar(new TabBarPrivate);
 }
+
+
+int TabViewPrivate::tabAt(const QPoint &pos)
+{
+    return tabBar()->tabAt(pos);
+}

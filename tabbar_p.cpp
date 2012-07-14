@@ -36,20 +36,45 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
     // stop dragging
     if (dragging > -1) {
         // Stop dragging
-
+        QPoint pos = mapToGlobal(event->pos());
         TabBarPrivate *w = dynamic_cast<TabBarPrivate*>(
-                    QApplication::widgetAt(mapToGlobal(event->pos())));
+                    QApplication::widgetAt(pos));
 
         qDebug() << "stop dragging tab" << "on widget" << w;
 
         // Chose action by the widget under the mouse's coordinates
         if (w == NULL) {
+            // Creates a new window with the dragged tab
             createNewWindow(dragging);
+
+        } else {
+            // Move the dragged tab into the window under the cursor
+            TabbedWindow *wnd = dynamic_cast<TabbedWindow*>(w->window());
+
+            if (wnd != NULL) {
+                moveToWindow(wnd, pos, dragging);
+            } else {
+                qDebug() << "TabBarPrivate not inside a TabbedWindow!!!";
+            }
         }
 
         // Reset flag
         dragging = -1;
     }
+}
+
+
+void TabBarPrivate::moveToWindow(TabbedWindow *wnd, QPoint pos, int index)
+{
+    // Remove view from this window
+    TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
+    QString text = tabText(index);
+    QWidget *page = view->widget(index);
+
+    view->removeTab(index);
+
+    // Insert tab into the new window at the given cursor's position
+    wnd->insertTab(pos, page, text);
 }
 
 

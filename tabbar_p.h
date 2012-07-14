@@ -2,6 +2,8 @@
 #define VIEWBAR_P_H
 
 #include <QtGui>
+#include "tabbedwindow.h"
+
 
 class TabBarPrivate : public QTabBar
 {
@@ -15,6 +17,7 @@ public:
 
 protected:
     void createNewWindow(int index);
+    void moveToWindow(TabbedWindow *wnd, QPoint pos, int index);
     void tabRemoved(int index);
     
 signals:
