@@ -47,7 +47,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
     }
 
     // If left button was released and a move action is involved
-    // stop the current action
+    // process the current action
     if (moveEvent->type() == DRAG && moveEvent->manhattan(event->globalPos()))
     {
         // Stop dragging
@@ -56,7 +56,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
 
         qDebug() << "stop dragging tab" << "on widget" << w;
 
-        // Chose action by the widget under the mouse's coordinates
+        // Choose action by the widget under the mouse's coordinates
         if (w == NULL) {
             // Creates a new window with the dragged tab
             createNewWindow(event->globalPos(), moveEvent);
