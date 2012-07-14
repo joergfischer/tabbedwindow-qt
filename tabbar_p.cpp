@@ -45,7 +45,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event) {
         // Chose action by the widget under the mouse's coordinates
         if (w == NULL) {
             // Creates a new window with the dragged tab
-            createNewWindow(dragging);
+            createNewWindow(pos, dragging);
 
         } else {
             // Move the dragged tab into the window under the cursor
@@ -86,13 +86,15 @@ void TabBarPrivate::tabRemoved(int index)
 }
 
 
-void TabBarPrivate::createNewWindow(int index)
+void TabBarPrivate::createNewWindow(QPoint pos, int index)
 {
     // Retrieve references
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
 
-    // Create the new window
+    // Create the new window with the same size and positioned under the cursor
     TabbedWindow *wnd = new TabbedWindow();
+    wnd->resize(window()->size());
+    wnd->move(pos);
 
     // Move widget to the new window
     QWidget *tab = view->widget(index);
