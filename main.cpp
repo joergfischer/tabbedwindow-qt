@@ -6,16 +6,18 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
     TabbedWindow w;
+    w.resize(400, 400);
     w.show();
 
-    QWidget v1;
-    QWidget v2;
+    QWidget red, green, blue;
 
-    v1.setStyleSheet("background-color: red");
-    v2.setStyleSheet("background-color: blue");
+    red.setStyleSheet("background-color: red");
+    blue.setStyleSheet("background-color: blue");
+    green.setStyleSheet("background-color: green");
 
-    w.addView(&v1, QString("Red View"));
-    w.addView(&v2, QString("Blue view"));
+    w.addView(&red, QString("Red View"));
+    w.addView(&blue, QString("Blue view"));
+    w.addView(&green, QString("Green view"));
     
     return a.exec();
 }
