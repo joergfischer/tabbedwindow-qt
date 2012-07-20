@@ -7,7 +7,8 @@
 
 
 TabBarPrivate::TabBarPrivate(QWidget *parent) :
-    QTabBar(parent)
+    QTabBar(parent),
+    moveEvent(NULL)
 {
 }
 
@@ -21,20 +22,16 @@ TabBarPrivate::~TabBarPrivate()
 void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
     // If left button is pressed start tab move event
-    if (event->button() == Qt::LeftButton) {
+    int index = tabAt(event->pos());
+
+    if (event->button() == Qt::LeftButton && index > -1) {
         QPoint offset = event->globalPos() - window()->pos();
 
-        moveEvent = new TabMoveEvent(offset, tabAt(event->pos()));
+        moveEvent = new TabMoveEvent(offset, index);
     }
 
     // Call superclass
     QTabBar::mousePressEvent(event);
-}
-
-
-void TabBarPrivate::moveWindow(QWidget *window, const QPoint &pos)
-{
-    window->move(pos);
 }
 
 
@@ -55,7 +52,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
     if (w == NULL) {
         if (count() == 1) {
             // Move the current window into the new position
-            moveWindow(window(), event->globalPos());
+            window()->move(event->globalPos() - moveEvent->pos());
         } else {
             // Creates a new window with the dragged tab
             createNewWindow(event->globalPos(), moveEvent);
