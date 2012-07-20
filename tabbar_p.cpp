@@ -20,21 +20,10 @@ TabBarPrivate::~TabBarPrivate()
 
 void TabBarPrivate::mousePressEvent(QMouseEvent *event)
 {
-    // If left button is pressed save current mouse position for
-    // possible draggin action triggered in the future
-    TabMoveEvent::MovementType type;
-    QPoint pos;
-
+    // If left button is pressed start tab move event
     if (event->button() == Qt::LeftButton) {
-        if (count() > 1) {
-            type = TabMoveEvent::Dragging;
-            pos = event->globalPos();
-        } else {
-            type = TabMoveEvent::Moving;
-            pos = event->globalPos() - window()->pos();
-        }
-
-        moveEvent = new TabMoveEvent(type, tabAt(event->pos()), pos);
+        moveEvent = new TabMoveEvent(window()->pos() - event->globalPos(),
+                                     tabAt(event->pos()));
     }
 
     // Call superclass
