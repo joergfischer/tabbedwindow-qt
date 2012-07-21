@@ -1,8 +1,8 @@
 #include "tabmoveevent.h"
 
 
-TabMoveEvent::TabMoveEvent(QPoint& pos, int index)
+TabMoveEvent::TabMoveEvent(const QPoint& offset, int index)
 {
     m_index = index;
-    m_pos = pos;
+    m_offset = offset;
 }

@@ -12,14 +12,14 @@ public:
        the mouse cursor and the position of the mouse as the offset between the
        current position and the top left corner of the enclosing window
     */
-    TabMoveEvent(QPoint& pos, int index);
+    TabMoveEvent(const QPoint& offset, int index);
 
     const int index() { return m_index; }
-    const QPoint pos() { return m_pos; }
+    const QPoint offset() { return m_offset; }
 
 private:
     int m_index;
-    QPoint m_pos;
+    QPoint m_offset;
 };
 
 #endif // TABMOVEEVENT_H

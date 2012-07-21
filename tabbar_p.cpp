@@ -52,7 +52,7 @@ void TabBarPrivate::mouseReleaseEvent(QMouseEvent *event)
     if (w == NULL) {
         if (count() == 1) {
             // Move the current window into the new position
-            window()->move(event->globalPos() - moveEvent->pos());
+            window()->move(event->globalPos() - moveEvent->offset());
         } else {
             // Creates a new window with the dragged tab
             createNewWindow(event->globalPos(), moveEvent);
@@ -105,7 +105,7 @@ void TabBarPrivate::createNewWindow(const QPoint &pos, TabMoveEvent *event)
     TabbedWindow *wnd = new TabbedWindow();
 
     wnd->resize(window()->size());
-    wnd->move(pos - event->pos());
+    wnd->move(pos - event->offset());
 
     // Move widget to the new window
     TabViewPrivate *view = static_cast<TabViewPrivate*>(parent());
