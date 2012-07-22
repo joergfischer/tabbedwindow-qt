@@ -1,3 +1,5 @@
+#include <QApplication>
+
 #include "ghostwindow.h"
 #include "tabbar.h"
 
@@ -18,10 +20,18 @@ GhostWindow::GhostWindow(TabBar *tabbar, const QPoint& pos) :
 
     m_offset = tabbar->mapToGlobal(pos) - wnd->pos();
     m_index = tabbar->tabAt(pos);
+    m_originPos = tabbar->mapToGlobal(pos);
 }
 
 
 void GhostWindow::moveWithOffset(const QPoint& pos)
 {
     QWidget::move(pos - m_offset);
+}
+
+
+bool GhostWindow::manhattanLength(const QPoint &pos)
+{
+    return (pos - m_originPos).manhattanLength()
+            >= QApplication::startDragDistance();
 }

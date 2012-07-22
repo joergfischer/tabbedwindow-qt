@@ -50,25 +50,27 @@ void TabBar::mouseReleaseEvent(QMouseEvent *event)
         return;
     }
 
-    //
-    TabBar *w = dynamic_cast<TabBar*>(
-                QApplication::widgetAt(event->globalPos()));
+    // Execute drag code only if far enough
+    if (m_ghost->manhattanLength(event->globalPos())) {
+        TabBar *w = dynamic_cast<TabBar*>(
+                    QApplication::widgetAt(event->globalPos()));
 
-    // Choose action by the widget under the mouse's coordinates
-    if (w == NULL) {
-        if (count() == 1) {
-            // Move the current window into the new position
-            window()->move(m_ghost->pos());
+        // Choose action by the widget under the mouse's coordinates
+        if (w == NULL) {
+            if (count() == 1) {
+                // Move the current window into the new position
+                window()->move(m_ghost->pos());
+            } else {
+                // Creates a new window with the dragged tab
+                createNewWindow(m_ghost);
+            }
         } else {
-            // Creates a new window with the dragged tab
-            createNewWindow(m_ghost);
-        }
-    } else {
-        // Move the dragged tab into the window under the cursor
-        TabbedWindow *wnd = dynamic_cast<TabbedWindow*>(w->window());
+            // Move the dragged tab into the window under the cursor
+            TabbedWindow *wnd = dynamic_cast<TabbedWindow*>(w->window());
 
-        if (wnd != NULL) {
-            moveToWindow(wnd, event->globalPos(), m_ghost);
+            if (wnd != NULL) {
+                moveToWindow(wnd, event->globalPos(), m_ghost);
+            }
         }
     }
 
