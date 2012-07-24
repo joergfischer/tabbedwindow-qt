@@ -23,9 +23,6 @@ public:
 private:
     TabbedWindow *q_ptr;
     TabView* tabs;
-
-private slots:
-    void onCurrentChanged(int);
 };
 
 #endif // TABBEDWINDOWPRIVATE_H
