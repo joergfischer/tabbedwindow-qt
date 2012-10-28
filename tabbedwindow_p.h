@@ -33,11 +33,15 @@
 class TabView;
 
 
+/*
+ * Private implementation of the TabbedWindow class (PIMPL pattern)
+ */
 class TabbedWindowPrivate : public QObject
 {
     Q_OBJECT
 
 public:
+    // Constructor accepts the pointer of the public implementation
     TabbedWindowPrivate(TabbedWindow* q_ptr);
 
     int addView(QWidget* view, const QString &title);
