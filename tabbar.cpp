@@ -106,7 +106,7 @@ void TabBar::mouseReleaseEvent(QMouseEvent *event)
 
 
 void TabBar::moveToWindow(TabbedWindow *wnd, const QPoint &pos,
-                                 GhostWindow *ghost)
+                          GhostWindow *ghost)
 {
     // Remove view from this window
     TabView *view = static_cast<TabView*>(parent());
