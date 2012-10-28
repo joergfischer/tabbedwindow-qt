@@ -52,10 +52,6 @@ protected:
     void createNewWindow(GhostWindow*);
     void moveToWindow(TabbedWindow*, const QPoint&, GhostWindow*);
     void tabRemoved(int index);
-    
-signals:
-    
-public slots:
 
 private:
     GhostWindow *m_ghost;
