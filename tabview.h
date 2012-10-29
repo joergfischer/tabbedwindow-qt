@@ -30,6 +30,10 @@
 #include <QTabWidget>
 
 
+/*
+ * Subclass of a standard QTabWidget, to be extended to fit the desired view's
+ * Drag&Drop behaviour
+ */
 class TabView : public QTabWidget
 {
     Q_OBJECT
@@ -37,6 +41,7 @@ class TabView : public QTabWidget
 public:
     explicit TabView(QWidget *parent = 0);
 
+    // Implementation of the QTabBar::tabAt method
     int tabAt(const QPoint &pos);
 };
 
