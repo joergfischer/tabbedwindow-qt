@@ -58,8 +58,8 @@ public:
     // Index of the original tab in the tab bar
     const int index() { return m_index; }
 
-    // Move the widget into the given position taking in accout the current
-    // offest() value
+    // Move the widget into the given position taking in account the current
+    // offset() value
     void moveWithOffset(const QPoint&);
 
     // Return True if the difference between the position of the original
