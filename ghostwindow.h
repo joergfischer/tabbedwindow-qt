@@ -33,7 +33,7 @@
 class TabBar;
 
 /*
- * This widgest is a static screenshot of the original tab view.
+ * This widget is a static screenshot of the original tab view.
  *
  * It will be created during the Drag&Drop action as a visual feedback for the
  * user.
